@@ -4,17 +4,17 @@ require_once('../lib/db_login.php');
 // include("../template/headermahasiswa.php");
 
 // Pengambilan data username
-$username = $_SESSION['username'];
-$query = "SELECT * FROM user WHERE username = '" . $username . "'";
+$nama = $_SESSION['nama'];
+$query = "SELECT * FROM users WHERE nama = '" . $nama . "'";
     $result = $db->query($query);
     if (!$result) {
         die("Could not query the database: <br />" . $db->error);
     } else {
         if ($result->num_rows > 0) {
-            $_SESSION['username'] = $username;
+            $_SESSION['nama'] = $nama;
         }else {
             // Jika username dari user tidak ditemukan
-            $username = "Guest";
+            $nama = "Guest";
         }
     }
 $db->close();
@@ -26,11 +26,21 @@ $db->close();
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
     <title>Dashboard</title>
     <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" />
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/dashboardMHS.css">
     <!-- <script src="../js/scripts.js"></script> -->
 </head>
 <body>
-
+<style>
+    .profile-box {
+        background-color: darkgray;
+        width: 980px;
+        height: 465px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-right: auto;
+    }
+</style>
 <div class="flex">
     <!-- Navbar -->
     <div class="fixed top-0 left-0 right-0 flex bg-blue-900 p-5 text-white">
@@ -56,7 +66,7 @@ $db->close();
                 <img src="../assets/images/user.png" class="profil-side px-6 py-2 mx-auto d-block">
             </li>
             <li>
-                <p class="text-white text-center"><?php echo $username; ?></p>
+                <p class="text-white text-center"><?php echo $nama; ?></p>
                 <p class="text-white text-center">Mahasiswa Informatika</p>
             </li>
             <br>
@@ -86,17 +96,37 @@ $db->close();
                 <h1 class="text-xl font-bold mb-4">Profil Mahasiswa</h1>
                 <div>
                 <div class="profile-box shadow">
-                    <h1 class="text-white text-center font-bold py-5">Mahasiswa Informatika UNDIP</h1>
+                    <h1 class="text-dark text-center font-bold py-5">Mahasiswa Informatika UNDIP</h1>
                     <div>
                         <img src="../assets/images/user.png" class="profil-box px-10 py-2 d-block" style="margin-top: 20px;">
                     </div>
-                    <!-- <div style="display: flex;">
+                    <div style="display: flex;">
                         <img src="../assets/images/pencil.png" style="margin-left: 93px; margin-top: 3px; width: 15px; height: 15px;">
-                        <a href="uploadfoto.php" class="text-white" style="margin-left: 5px; font-size: 13px;">Upload Foto</a>
-                    </div> -->
+                        <a href="uploadfoto.php" class="text-dark" style="margin-left: 5px; font-size: 13px;">Upload Foto</a>
+                    </div>
                 </div>
             </div>
-            <!-- End konten -->
+            
+            <!-- IRS Input -->
+        <div class="irs-input">
+            <h2 class="text-lg font-bold mb-4">Input IRS</h2>
+            <form>
+                <label for="irs">IRS:</label>
+                <input type="text" id="irs" name="irs" placeholder="Enter IRS">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- KHS Input -->
+        <div class="khs-input">
+            <h2 class="text-lg font-bold mb-4">Input KHS</h2>
+            <form>
+                <label for="khs">KHS:</label>
+                <input type="text" id="khs" name="khs" placeholder="Enter KHS">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </main>
 
 <script>
     //JavaScript untuk menu collapse (progress akademik)

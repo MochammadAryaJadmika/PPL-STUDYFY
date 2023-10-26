@@ -2,6 +2,7 @@
 session_start();
 require_once('./lib/db_login.php');
 
+$error_message = '';
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -13,10 +14,10 @@ function test_input($data) {
 if (isset($_POST['login'])) {
     $valid = TRUE;
 
-    // Memeriksa validasi username
-    $username = test_input($_POST['username']);
-    if ($username == '') {
-        $error_username = 'Username harus diisi';
+    // Memeriksa validasi nama
+    $nama = test_input($_POST['nama']);
+    if ($nama == '') {
+        $error_nama = 'Username harus diisi';
         $valid = FALSE;
     }
 
@@ -30,24 +31,31 @@ if (isset($_POST['login'])) {
     // Memeriksa validasi
     if ($valid) {
         // Assign query
-        $query = "SELECT * FROM user WHERE username = '" . $username . "' AND password = '" . md5($password) . "'";
-
-        // Execute query
+        $query = "SELECT * FROM users WHERE nama='" . $nama . "' AND Password='" . md5($password) . "' ";
         $result = $db->query($query);
         if (!$result) {
-            die("Could not query the database: <br />" . $db->error);
+            die("Couldn't query the database: <br/>" . $db->error);
         } else {
             if ($result->num_rows > 0) {
-                $_SESSION['username'] = $username;
-                header('Location: ./mahasiswa/dashboardMHS.php');
+                $row = $result->fetch_object();
+                $_SESSION['status'] = "login";
+                $_SESSION['nama'] = $nama;
+                if ($row->role == "mahasiswa") {
+                    header('Location:./mahasiswa/dashboardMHS.php');
+                } else if ($row->role == "operator") {
+                    header('Location: ./operator/dashboardOPT.php');
+                } else if ($row->role == "departemen") {
+                    header('Location:./departemen/dashboardDPT.php');
+                } else {
+                    header('Location:./dosen/dashboardDSN.php');
+                }
                 exit;
             } else {
-                echo '<span class "error">Username atau password salah.</span>';
+                $error_message = "Username atau password salah. Silahkan coba lagi.";
             }
         }
-
         $db->close();
-    }
+    }    
 }
 ?>
 
@@ -57,13 +65,24 @@ if (isset($_POST['login'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Login</title>
     <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" />
 </head>
 <style>
+    body {
+    background-image: url(./assets/img/logo1.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    }
+
     .main {
     font-family: 'Open Sans';
+    }
+
+    .error {
+        margin-left: 175px;
     }
 
     /* Kotak login */
@@ -84,6 +103,7 @@ if (isset($_POST['login'])) {
         justify-content: center;
         align-items: center;
         height: 150px;
+        font-size: 2vw;
     }
     
     /* form */
@@ -98,9 +118,12 @@ if (isset($_POST['login'])) {
         margin: auto;
         width: 300px;
         height: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>
-
 <body>
 <br>
 <body class="" style="background-image: url(./assets/img/logo1.jpg);background-repeat: no-repeat; background-size: 800px 700px;">
@@ -110,21 +133,22 @@ if (isset($_POST['login'])) {
 <div class="error"><?php if(isset($error_login)) echo $error_login;?></div>
     <form method="POST" autocomplete="on" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="center-labels">
-        <label style="width: auto; height: 0.5cm; font-size: 1.5em;"><strong>StudyfyIF</strong></label>
+        <label style="width: auto; height: 0.5cm;"><strong>StudyfyIF</strong></label>
         <br>
-        <label style="width: auto; height: 1cm; font-size: 1.3em;">Universitas Diponegoro</label>
+        <label style="width: auto; height: 1cm;">Universitas Diponegoro</label>
         </div>
+        <div class="error-message text-center"><?php echo $error_message; ?></div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username" id="user" name="username" maxlength="50" value="<?php if(isset($username)) echo $username;?>">
-	        <div class="error"><?php if(isset($error_username)) echo $error_username;?></div>
+            <input type="text" class="form-control" placeholder="Username" id="users" name="nama" maxlength="50" value="<?php if(isset($nama)) echo $nama;?>">
+            <div class="error"><?php if(isset($error_nama)) echo $error_nama;?></div>
         </div>
         <br>
         <div class="form-group">
 	        <input type="password" class="form-control" placeholder="Password" id="password" name="password" maxlength="50">
-	    <div class="error"><?php if(isset($error_password)) echo $error_password;?></div>
+	        <div class="error"><?php if(isset($error_password)) echo $error_password;?></div>
     </div>
         <br>
-        <button type="login" class="btn center-labels btn-dark" name="login" value="login">LOGIN</button>;
+        <button type="login" class="btn btn-dark" name="login" value="login">LOGIN</button>;
     </form>
     </div>
 </div>

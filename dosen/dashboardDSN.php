@@ -48,8 +48,8 @@ $db->close();
     <!-- Sidebar -->
     <aside class="fixed-sidebar w-64 h-auto bg-gray-800 text-white p-4">
         <div style="display: flex; align-items: center;">
-            <img src="../assets/img/logo.png" style="margin-left: 1px; margin-bottom: 10px; width: 40px; height: 40px;">
-            <h1 class="text-2xl font-bold mb-3 px-4">StudyfyIF</h1>
+            <img src="../assets/img/logo2.png" style="margin-left: 5px; margin-bottom: 10px; width: 40px; height: 40px;">
+            <h1 class="text-2xl font-bold mb-3 px-3">StudyfyIF</h1>
         </div>
         <ul>
             <li class="mb-2">
@@ -81,145 +81,24 @@ $db->close();
 
 
     <!-- Konten (belum) -->
-<main class="main-content flex-1 p-4">
-    <!-- CRUD -->
-    <div class="profilebox" id="profilebox">
-        <h1 class="text-xl font-bold mb-4">Dashboard</h1>
-        <img class="grafik" src="../assets/img/grafik.png">
-        <div class="profile-box-12-container">
-            <div class="profile-box-1 shadow">
-                <h1 class="text-dark text-8xl text-center font-bold py-5">350</h1>
-                <p class="text-dark text-center">Total Mahasiswa Aktif</p>
+    <main class="main-content flex-1 p-4">
+        <!-- CRUD -->
+            <div class="profilebox" id="profilebox">
+                <h1 class="text-xl font-bold mb-4">Dashboard</h1>
+                <img class=grafik src="../assets/img/grafik.png">
+                <div class="profile-box-12-container">
+                <div class="profile-box-1 shadow">
+                    <h1 class="text-dark text-8xl text-center font-bold py-5">350</h1>
+                    <p class="text-dark text-center">Total Mahasiswa Aktif</p>
+                </div>
+                <div class="profile-box-2 shadow px-10">
+                    <h1 class="text-dark text-8xl text-center font-bold py-5">12</h1>
+                    <p class="text-dark text-center">Total Mahasiswa Cuti</p>
+                </div>
+                </div>
+                </div>
             </div>
-            <div class="profile-box-2 shadow px-10">
-                <h1 class="text-dark text-8xl text-center font-bold py-5">12</h1>
-                <p class="text-dark text-center">Total Mahasiswa Cuti</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- IRS Section -->
-<div class="profilebox" id="irs-section">
-    <h1 class="text-xl font-bold mb-4">IRS</h1>
-    <div class="irs-content">
-        <h2 class="text-lg font-bold mb-2">Semester 2023/2024 - Ganjil</h2>
-        <table class="irs-table">
-            <thead>
-                <tr>
-                    <th>Mata Kuliah</th>
-                    <th>SKS</th>
-                    <th>Nilai</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Matematika Dasar</td>
-                    <td>3</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td>Pemrograman Web</td>
-                    <td>4</td>
-                    <td>B+</td>
-                </tr>
-                <!-- Add more rows for other courses -->
-            </tbody>
-        </table>
-        <p class="gpa">GPA: 3.45</p>
-    </div>
-</div>
-
-<!-- KHS Section -->
-<div class="profilebox" id="khs-section">
-    <h1 class="text-xl font-bold mb-4">KHS</h1>
-    <div class="khs-content">
-        <h2 class="text-lg font-bold mb-2">Semester 2022/2023 - Genap</h2>
-        <table class="khs-table">
-            <thead>
-                <tr>
-                    <th>Mata Kuliah</th>
-                    <th>SKS</th>
-                    <th>Nilai</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Matematika Dasar</td>
-                    <td>3</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td>Pemrograman Dasar</td>
-                    <td>4</td>
-                    <td>A-</td>
-                </tr>
-                <!-- Add more rows for other courses -->
-            </tbody>
-        </table>
-        <p class="cumulative-gpa">Cumulative GPA: 3.65</p>
-    </div>
-</div><!-- IRS Section -->
-<div class="profilebox" id="irs-section">
-    <h1 class="text-xl font-bold mb-4">IRS</h1>
-    <div class="irs-content">
-        <h2 class="text-lg font-bold mb-2">Semester 2023/2024 - Ganjil</h2>
-        <table class="irs-table">
-            <thead>
-                <tr>
-                    <th>Mata Kuliah</th>
-                    <th>SKS</th>
-                    <th>Nilai</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Matematika Dasar</td>
-                    <td>3</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td>Pemrograman Web</td>
-                    <td>4</td>
-                    <td>B+</td>
-                </tr>
-                <!-- Add more rows for other courses -->
-            </tbody>
-        </table>
-        <p class="gpa">GPA: 3.45</p>
-    </div>
-</div>
-
-<!-- KHS Section -->
-<div class="profilebox" id="khs-section">
-    <h1 class="text-xl font-bold mb-4">KHS</h1>
-    <div class="khs-content">
-        <h2 class="text-lg font-bold mb-2">Semester 2022/2023 - Genap</h2>
-        <table class="khs-table">
-            <thead>
-                <tr>
-                    <th>Mata Kuliah</th>
-                    <th>SKS</th>
-                    <th>Nilai</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Matematika Dasar</td>
-                    <td>3</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td>Pemrograman Dasar</td>
-                    <td>4</td>
-                    <td>A-</td>
-                </tr>
-                <!-- Add more rows for other courses -->
-            </tbody>
-        </table>
-        <p class="cumulative-gpa">Cumulative GPA: 3.65</p>
-    </div>
-</div>
-</main>
+            <!-- End konten -->
 
 <script>
     //JavaScript untuk menu collapse (progress akademik)

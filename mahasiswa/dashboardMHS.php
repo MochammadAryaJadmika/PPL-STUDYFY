@@ -32,7 +32,7 @@ $db->close();
 <body>
 <style>
     .profile-box {
-        background-color: darkgray;
+        background-color: lightgray;
         width: 980px;
         height: 465px;
         box-sizing: border-box;
@@ -58,8 +58,8 @@ $db->close();
     <!-- Sidebar -->
     <aside class="fixed-sidebar w-64 h-auto bg-gray-800 text-white p-4">
         <div style="display: flex; align-items: center;">
-            <img src="../assets/img/logo.png" style="margin-left: 1px; margin-bottom: 10px; width: 40px; height: 40px;">
-            <h1 class="text-2xl font-bold mb-3 px-4">StudyfyIF</h1>
+            <img src="../assets/img/logo2.png" style="margin-left: 5px; margin-bottom: 10px; width: 40px; height: 40px;">
+            <h1 class="text-2xl font-bold mb-3 px-3">StudyfyIF</h1>
         </div>
         <ul>
             <li class="mb-2">
@@ -91,42 +91,47 @@ $db->close();
 
     <!-- Konten (belum) -->
     <main class="main-content flex-1 p-4">
-        <!-- CRUD -->
             <div class="profilebox" id="profilebox">
                 <h1 class="text-xl font-bold mb-4">Profil Mahasiswa</h1>
                 <div>
                 <div class="profile-box shadow">
-                    <h1 class="text-dark text-center font-bold py-5">Mahasiswa Informatika UNDIP</h1>
-                    <div>
-                        <img src="../assets/images/user.png" class="profil-box px-10 py-2 d-block" style="margin-top: 20px;">
+                    <h1 class="text-dark text-center font-bold py-3">Mahasiswa Informatika UNDIP</h1>
+                    <article>
+                        <p class="content text-dark font-bold" style="font-size: 15px;">NIM</p>
+                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;" disabled>
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px;">Nama Lengkap</p>
+                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;" disabled>
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px;">Angkatan</p>
+                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;" disabled>
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px;">Jalur Masuk</p>
+                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;" disabled>
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px;">Alamat</p>
+                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;">
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-left: 600px; margin-top: -291px;">Provinsi</p>
+                        <input type="text" placeholder="XXXXX" style="margin-left: 600px;">
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-left: 600px; margin-top: 13px;">Kabupaten/Kota</p>
+                        <input type="text" placeholder="XXXXX" style="margin-left: 600px;">
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-left: 600px; margin-top: 15px;">No.Telp</p>
+                        <input type="text" placeholder="XXXXX" style="margin-left: 600px;">
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-left: 600px; margin-top: 16px;">Email</p>
+                        <input type="text" placeholder="XXXXX" style="margin-left: 600px;">
+                        <a href="dashboardMHS.php" class="btn-db text-white hover:bg-gray-600 px-4 py-2 block">Simpan</a>
+                    </article>
+                    <div class="profil-box">
+                        <img src="../assets/images/user.png" class="profil-box px-10 py-2 d-block" style="margin-top: 50px;">
                     </div>
                     <div style="display: flex;">
-                        <img src="../assets/images/pencil.png" style="margin-left: 93px; margin-top: 3px; width: 15px; height: 15px;">
-                        <a href="uploadfoto.php" class="text-dark" style="margin-left: 5px; font-size: 13px;">Upload Foto</a>
+                        <img src="../assets/images/pencil.png" style="margin-left: 100px; margin-top: -170px; width: 15px; height: 15px;">
+                        <a href="uploadfoto.php" class="text-dark" style="margin-left: 8px; margin-top: -170px; font-size: 13px;">Upload Foto</a>
+                    </div>
+                    <p style="margin-left: 95px; margin-top: -125px; font-size: 15px;">Status Akademik</p>
+                    <p class="status text-center py-1" style="background-color:springgreen; font-size: 15px;">Aktif 2023</p>
+                    <div>
+                        
                     </div>
                 </div>
             </div>
-            
-            <!-- IRS Input -->
-        <div class="irs-input">
-            <h2 class="text-lg font-bold mb-4">Input IRS</h2>
-            <form>
-                <label for="irs">IRS:</label>
-                <input type="text" id="irs" name="irs" placeholder="Enter IRS">
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-
-        <!-- KHS Input -->
-        <div class="khs-input">
-            <h2 class="text-lg font-bold mb-4">Input KHS</h2>
-            <form>
-                <label for="khs">KHS:</label>
-                <input type="text" id="khs" name="khs" placeholder="Enter KHS">
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </main>
+            <!-- End konten -->
 
 <script>
     //JavaScript untuk menu collapse (progress akademik)

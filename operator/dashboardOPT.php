@@ -5,18 +5,49 @@ require_once('../lib/db_login.php');
 
 // Pengambilan data username
 $username = $_SESSION['username'];
-$query = "SELECT * FROM users WHERE username = '" . $username . "'";
-    $result = $db->query($query);
-    if (!$result) {
-        die("Could not query the database: <br />" . $db->error);
-    } else {
-        if ($result->num_rows > 0) {
-            $_SESSION['username'] = $username;
-        }else {
-            // Jika username dari user tidak ditemukan
-            $username = "Guest";
-        }
+$queryUsername = "SELECT * FROM users WHERE username = '" . $username . "'";
+$resultUsername = $db->query($queryUsername);
+if (!$resultUsername) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    if ($resultUsername->num_rows > 0) {
+        $_SESSION['username'] = $username;
+    }else {
+        // Jika username dari user tidak ditemukan
+        $username = "Guest";
     }
+}
+
+// Pengambilan data jumlah operator
+$queryOperator = "SELECT COUNT(*) AS total_operator FROM operator";
+$resultOperator = $db->query($queryOperator);
+if (!$resultOperator) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    $row = $resultOperator->fetch_assoc();
+    $totalOperator = $row['total_operator'];
+}
+
+// Pengambilan data jumlah mahasiswa
+$queryMahasiswa = "SELECT COUNT(*) AS total_mahasiswa FROM mahasiswa";
+$resultMahasiswa = $db->query($queryMahasiswa);
+if (!$resultMahasiswa) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    $row = $resultMahasiswa->fetch_assoc();
+    $totalMahasiswa = $row['total_mahasiswa'];
+}
+
+// Pengambilan data jumlah dosen wali
+$queryDoswal = "SELECT COUNT(*) AS total_doswal FROM dosen";
+$resultDoswal = $db->query($queryDoswal);
+if (!$resultDoswal) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    $row = $resultDoswal->fetch_assoc();
+    $totalDoswal = $row['total_doswal'];
+}
+
 $db->close();
 ?>
 
@@ -27,26 +58,16 @@ $db->close();
     <title>Dashboard</title>
     <link rel="shortcut icon" href="../assets/img/logo2.png" />
     <!-- <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" /> -->
-    <link rel="stylesheet" type="text/css" href="../css/mhs/irs.css">
+    <link rel="stylesheet" type="text/css" href="../css/opt/dashboardOPT.css"> 
     <!-- <script src="../js/scripts.js"></script> -->
 </head>
 <body>
-<style>
-    .profile-box {
-        background-color: lightskyblue;
-        width: 980px;
-        height: 465px;
-        box-sizing: border-box;
-        border-radius: 10px;
-        margin-top: 10px;
-        margin-right: auto;
-    }
-</style>
+
 <div class="flex">
     <!-- Navbar -->
     <div class="fixed top-0 left-0 right-0 flex bg-blue-900 p-5 text-white">
         <!-- Welcome Sentence (Moved to the right) -->
-        <div class="text font-bold" style="margin-left: auto; margin-right: 45px; font-size: 18px;">Selamat Datang, Mahasiswa!</div>
+        <div class="text font-bold" style="margin-left: auto; margin-right: 45px; font-size: 18px;">Selamat Datang, Operator!</div>
         <!-- User Picture -->
         <div class="profiltop">
             <img src="../assets/images/user.png" class="profile w-9 h-9 rounded-full cursor-pointer" id="user-menu-toggle" style="margin-left: 10px; margin-right: 5px; margin-top: 5px;">
@@ -68,21 +89,24 @@ $db->close();
             </li>
             <li>
                 <p class="text-white text-center"><?php echo $username; ?></p>
-                <p class="text-white text-center">Mahasiswa Informatika</p>
+                <p class="text-white text-center">Admin Informatika</p>
             </li>
             <br>
             <li class="mb-2">
-                <a href="dashboardMHS.php" id="profil" class="text-white hover:bg-gray-600 px-4 py-2 block">Profil</a>
+                <a href="dashboardOPT.php" id="dashboard" class="text-white hover:bg-gray-600 px-4 py-2 block">Dashboard</a>
             </li>
             <li class="mb-2">
-                <button class="collapsible text-white hover:bg-gray-600 px-3 py-2 block">Progress Akademik</button>
-                <div class="submenu">
-                    <a href="irs.php" id="irs" class="text-white hover:bg-gray-600 px-4 py-2 block">IRS</a>
-                    <a href="khs.php" id="khs" class="text-white hover:bg-gray-600 px-4 py-2 block">KHS</a>
-                    <a href="pkl.php" id="pkl" class="text-white hover:bg-gray-600 px-4 py-2 block">PKL</a>
-                    <a href="skripsi.php" id="skripsi" class="text-white hover:bg-gray-600 px-4 py-2 block">Skripsi</a>
-                </div>
+                <a href="genAkun.php" id="generate" class="text-white hover:bg-gray-600 px-4 py-2 block">Generate Akun</a>
             </li>
+            <li class="mb-2">
+                <a href="manAkun.php" id="manage" class="text-white hover:bg-gray-600 px-4 py-2 block">Manajemen Akun</a>
+            </li>
+            <li class="mb-2">
+                <a href="dataMHS.php" id="datamhs" class="text-white hover:bg-gray-600 px-4 py-2 block">Data Mahasiswa</a>
+            </li>
+            <!-- <li class="mb-2">
+                <a href="../logout.php" id="logout" class="text-white hover:bg-gray-600 px-4 py-2 block">Logout</a>
+            </li> -->
         </ul>
     </aside>
 
@@ -91,25 +115,23 @@ $db->close();
     <main class="main-content flex-1 p-4">
         <!-- CRUD -->
             <div class="profilebox" id="profilebox">
-                <h1 class="text-xl font-bold mb-4">Data IRS Mahasiswa</h1>
-                <div>
-                <div class="profile-box shadow">
-                    <h1 class="text-dark text-center font-bold py-3">Mahasiswa Informatika UNDIP</h1>
-                    <form class="text-center" onsubmit="redirect()">
-                    <!-- SKS Input -->
-                    <div class="sks-input">
-                        <h2 class="center-labels font-bold mb-4" style="margin-right: 215px;">Jumlah SKS</h2>
-                        <form>
-                        <input type="text" placeholder="Masukkan SKS" style="margin-right: 120px;">
-                    <!-- IRS Input -->
-                    <div>
-                        <h2 class="center-labels font-bold mb-4" style="margin-right: 235px; margin-top: 15px;">Scan IRS</h2>
-                        <div class="box">
-                        <input type="file" id="irsFileInput" accept=".pdf, .jpg, .jpeg, .png" placeholder="No File Chosen" style="font-size: 15px; margin-right: 25px;"></div>
-                        <a href="dashboardMHS.php" class="btn-irs text-white hover:bg-gray-600 px-4 py-2 block">Simpan</a>
-                    </div>
-                        </form>
-                    </div>
+                <h1 class="text-xl font-bold mb-4">Dashboard</h1>
+                <div class="profile-box-12-container">
+                <div class="profile-box-1 shadow">
+                    <h1 class="text-dark text-8xl text-center font-bold py-5"><?php echo $totalOperator; ?></h1>
+                    <p class="text-dark text-center">Total Operator Departemen</p>
+                </div>
+                <div class="profile-box-2 shadow px-10">
+                    <h1 class="text-dark text-8xl text-center font-bold py-5"><?php echo $totalMahasiswa; ?></h1>
+                    <p class="text-dark text-center">Total Mahasiswa</p>
+                </div>
+                </div>
+                <div class="profile-box-3-container">
+                <div class="profile-box-3 shadow">
+                    <h1 class="text-dark text-8xl text-center font-bold py-5"><?php echo $totalDoswal; ?></h1>
+                    <p class="text-dark text-center">Total Dosen Wali</p>
+                </div>
+                </div>
             </div>
             <!-- End konten -->
 
@@ -151,13 +173,8 @@ $db->close();
         }
     }
 
-    function redirect() {
-        // Redirect to dashboardMHS.php
-        window.location.href = "dashboardMHS.php";
-    }
-
-    // Set item aktif pada "profil" saat halaman di load pertama kali
-    setActiveItem("irs");
+    // Set item aktif pada "dashboard" saat halaman di load pertama kali
+    setActiveItem("dashboard");
 </script>
 </body>
 </html>

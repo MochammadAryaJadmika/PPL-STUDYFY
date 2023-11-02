@@ -3,20 +3,54 @@ session_start();
 require_once('../lib/db_login.php');
 // include("../template/headermahasiswa.php");
 
-// Pengambilan data nama
-$nama = $_SESSION['nama'];
-$query = "SELECT * FROM users WHERE nama = '" . $nama . "'";
-    $result = $db->query($query);
-    if (!$result) {
-        die("Could not query the database: <br />" . $db->error);
-    } else {
-        if ($result->num_rows > 0) {
-            $_SESSION['nama'] = $nama;
-        }else {
-            // Jika nama dari user tidak ditemukan
-            $nama = "Guest";
-        }
+// Pengambilan data username
+$username = $_SESSION['username'];
+$queryUsername = "SELECT * FROM users WHERE username = '" . $username . "'";
+$resultUsername = $db->query($queryUsername);
+if (!$resultUsername) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    if ($resultUsername->num_rows > 0) {
+        $_SESSION['username'] = $username;
+    }else {
+        // Jika username dari user tidak ditemukan
+        $username = "Guest";
     }
+}
+
+// Pengambilan data NIP
+$queryNIP = "SELECT nip FROM dosen WHERE username = '" . $username . "'";
+$resultNIP = $db->query($queryNIP);
+if (!$resultNIP) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    if ($resultNIP->num_rows > 0) {
+        $row = $resultNIP->fetch_assoc();
+        $nip = $row["nip"];
+    }
+
+}
+
+// Pengambilan data jumlah mahasiswa aktif
+$queryMahasiswaAktif = "SELECT COUNT(*) AS total_mahasiswa_aktif FROM mahasiswa WHERE status = 'Aktif 2023'";
+$resultMahasiswaAktif = $db->query($queryMahasiswaAktif);
+if (!$resultMahasiswaAktif) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    $row = $resultMahasiswaAktif->fetch_assoc();
+    $totalMahasiswaAktif = $row['total_mahasiswa_aktif'];
+}
+
+// Pengambilan data jumlah mahasiswa cuti
+$queryMahasiswaCuti = "SELECT COUNT(*) AS total_mahasiswa_cuti FROM mahasiswa WHERE status = 'Cuti'";
+$resultMahasiswaCuti = $db->query($queryMahasiswaCuti);
+if (!$resultMahasiswaCuti) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    $row = $resultMahasiswaCuti->fetch_assoc();
+    $totalMahasiswaCuti = $row['total_mahasiswa_cuti'];
+}
+
 $db->close();
 ?>
 
@@ -25,8 +59,9 @@ $db->close();
 <head>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
     <title>Dashboard</title>
-    <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" />
-    <link rel="stylesheet" type="text/css" href="../css/dashboardDSN.css">
+    <link rel="shortcut icon" href="../assets/img/logo2.png" />
+    <!-- <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" /> -->
+    <link rel="stylesheet" type="text/css" href="../css/dsn/dashboardDSN.css">
     <!-- <script src="../js/scripts.js"></script> -->
 </head>
 <body>
@@ -56,15 +91,15 @@ $db->close();
                 <img src="../assets/images/user.png" class="profil-side px-6 py-2 mx-auto d-block">
             </li>
             <li>
-                <p class="text-white text-center"><?php echo $nama; ?></p>
-                <p class="text-white text-center">NIP XXXXX</p>
+                <p class="text-white text-center"><?php echo $username; ?></p>
+                <p class="text-white text-center">NIP: <?php echo $nip; ?></p>
             </li>
             <br>
             <li class="mb-2">
                 <a href="dashboardMHS.php" id="dashboard" class="text-white hover:bg-gray-600 px-4 py-2 block">Dashboard</a>
             </li>
             <li class="mb-2">
-                <a href="dataMHS.php" id="datamhs" class="text-white hover:bg-gray-600 px-4 py-2 block">Data Mahasiswa</a>
+                <a href="dataMHS.php" id="datamhs" class="text-white hover:bg-gray-600 px-4 py-2 block">Data Mahasiswa Perwalian</a>
             </li>
             <li class="mb-2">
                 <a href="dataMHS.php" id="datamhs" class="text-white hover:bg-gray-600 px-4 py-2 block">Progres Studi Mahasiswa</a>
@@ -88,11 +123,11 @@ $db->close();
                 <img class=grafik src="../assets/img/grafik.png">
                 <div class="profile-box-12-container">
                 <div class="profile-box-1 shadow">
-                    <h1 class="text-dark text-8xl text-center font-bold py-5">350</h1>
+                    <h1 class="text-dark text-8xl text-center font-bold py-5"><?php echo $totalMahasiswaAktif; ?></h1>
                     <p class="text-dark text-center">Total Mahasiswa Aktif</p>
                 </div>
                 <div class="profile-box-2 shadow px-10">
-                    <h1 class="text-dark text-8xl text-center font-bold py-5">12</h1>
+                    <h1 class="text-dark text-8xl text-center font-bold py-5"><?php echo $totalMahasiswaCuti; ?></h1>
                     <p class="text-dark text-center">Total Mahasiswa Cuti</p>
                 </div>
                 </div>

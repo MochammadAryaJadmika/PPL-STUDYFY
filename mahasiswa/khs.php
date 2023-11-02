@@ -27,7 +27,7 @@ $db->close();
     <title>Dashboard</title>
     <link rel="shortcut icon" href="../assets/img/logo2.png" />
     <!-- <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" /> -->
-    <link rel="stylesheet" type="text/css" href="../css/mhs/irs.css">
+    <link rel="stylesheet" type="text/css" href="../css/mhs/khs.css">
     <!-- <script src="../js/scripts.js"></script> -->
 </head>
 <body>
@@ -83,6 +83,9 @@ $db->close();
                     <a href="skripsi.php" id="skripsi" class="text-white hover:bg-gray-600 px-4 py-2 block">Skripsi</a>
                 </div>
             </li>
+            <!-- <li class="mb-2">
+                <a href="../logout.php" id="logout" class="text-white hover:bg-gray-600 px-4 py-2 block">Logout</a>
+            </li> -->
         </ul>
     </aside>
 
@@ -91,25 +94,24 @@ $db->close();
     <main class="main-content flex-1 p-4">
         <!-- CRUD -->
             <div class="profilebox" id="profilebox">
-                <h1 class="text-xl font-bold mb-4">Data IRS Mahasiswa</h1>
+                <h1 class="text-xl font-bold mb-4">Data KHS Mahasiswa</h1>
                 <div>
                 <div class="profile-box shadow">
                     <h1 class="text-dark text-center font-bold py-3">Mahasiswa Informatika UNDIP</h1>
                     <form class="text-center" onsubmit="redirect()">
                     <!-- SKS Input -->
                     <div class="sks-input">
-                        <h2 class="center-labels font-bold mb-4" style="margin-right: 215px;">Jumlah SKS</h2>
-                        <form>
-                        <input type="text" placeholder="Masukkan SKS" style="margin-right: 120px;">
+                        <h2 class="center-labels font-bold mb-4">Jumlah SKS</h2>
+                        <form class="text-center">
+                        <input type="text" placeholder="Masukkan SKS">
                     <!-- IRS Input -->
-                    <div>
-                        <h2 class="center-labels font-bold mb-4" style="margin-right: 235px; margin-top: 15px;">Scan IRS</h2>
-                        <div class="box">
-                        <input type="file" id="irsFileInput" accept=".pdf, .jpg, .jpeg, .png" placeholder="No File Chosen" style="font-size: 15px; margin-right: 25px;"></div>
+                    <div class="irs-input">
+                        <h2 class="center-labels font-bold mb-4">Input IRS</h2>
+                        <input type="text" placeholder="Masukkan IRS">
                         <a href="dashboardMHS.php" class="btn-irs text-white hover:bg-gray-600 px-4 py-2 block">Simpan</a>
-                    </div>
-                        </form>
-                    </div>
+                </form>
+            </div>
+                </div>
             </div>
             <!-- End konten -->
 
@@ -157,7 +159,7 @@ $db->close();
     }
 
     // Set item aktif pada "profil" saat halaman di load pertama kali
-    setActiveItem("irs");
+    setActiveItem("khs");
 </script>
 </body>
 </html>

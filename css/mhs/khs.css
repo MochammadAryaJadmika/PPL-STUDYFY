@@ -1,0 +1,108 @@
+/* Profile Box */
+    /* Tambahkan padding untuk konten utama agar tidak tertutupi oleh sidebar */
+    .main-content {
+        margin-top: 60px;
+        margin-left: 250px;
+        /* Sesuaikan margin sesuai lebar sidebar */
+        padding: 20px;
+    }
+
+    .content {
+        margin-top: 30px;
+        margin-left: 300px;
+    }
+    
+
+    .status {
+        margin-top: 5px;
+        margin-left: 98px;
+        width: 100px;
+        height: 30px;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+
+    .btn-db {
+        margin: auto;
+        margin-top: 35px;
+        margin-left: 690px;
+        background-color: dodgerblue;
+        width: 90px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 7px;
+    }
+
+    /* Sidebar (menu kiri) */
+    .fixed-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        color: white;
+        padding: 20px;
+    }
+
+    /* foto profil (sidebar) */
+    .profil-side {
+        margin-left: 40px;
+        border-radius: 50%;
+    }
+
+    /* foto profil (box) */
+    .profil-box {
+        margin-top: -320px;
+        margin-left: 35px;
+        border-radius: 50%;
+        position: fixed;
+    }
+
+
+    /* Collapsible menu */
+    .collapsible {
+        background: none;
+        width: 100%;
+        text-align: left;
+        padding: 15px;
+    }
+    .submenu {
+        display: none;
+        padding-left: 20px;
+    }
+
+    /* Navbar */
+    .profiltop{
+        position: absolute;
+        top: 10px;
+        right: 10px; 
+    }
+
+
+    /* KHS */
+    .sks-input{
+        margin-top: 100px;
+    }
+
+    .irs-input{
+        margin-top: 20px;
+    }
+    .center-labels{
+        text-align: left;
+        margin-left: 398px;
+    }
+    .btn-irs {
+        margin: auto;
+        margin-top: 50px;
+        background-color: dodgerblue;
+        width: 100px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+    }

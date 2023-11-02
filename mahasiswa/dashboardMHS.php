@@ -4,19 +4,65 @@ require_once('../lib/db_login.php');
 // include("../template/headermahasiswa.php");
 
 // Pengambilan data username
-$nama = $_SESSION['nama'];
-$query = "SELECT * FROM users WHERE nama = '" . $nama . "'";
-    $result = $db->query($query);
-    if (!$result) {
-        die("Could not query the database: <br />" . $db->error);
-    } else {
-        if ($result->num_rows > 0) {
-            $_SESSION['nama'] = $nama;
-        }else {
-            // Jika username dari user tidak ditemukan
-            $nama = "Guest";
-        }
+$username = $_SESSION['username'];
+$queryUsername = "SELECT * FROM users WHERE username = '" . $username . "'";
+$resultUsername = $db->query($queryUsername);
+if (!$resultUsername) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    if ($resultUsername->num_rows > 0) {
+        $_SESSION['username'] = $username;
+    }else {
+        // Jika username dari user tidak ditemukan
+        $username = "Guest";
     }
+}
+
+$queryData = "SELECT nim, nama, alamat, kode_kab, kode_prov, angkatan, jalur_masuk, email, handphone, status FROM mahasiswa WHERE username = '" . $username . "'";
+$resultData = $db->query($queryData);
+if (!$resultData) {
+    die("Could not query the database: <br />" . $db->error);
+} else {
+    if ($resultData->num_rows > 0) {
+        $row = $resultData->fetch_assoc();
+    
+        // Menyimpan data dalam variabel
+        $nim = $row['nim'];
+        $nama = $row['nama'];
+        $alamat = $row['alamat'];
+        $kode_kab = $row['kode_kab'];
+        $kode_prov = $row['kode_prov'];
+        $angkatan = $row['angkatan'];
+        $jalur_masuk = $row['jalur_masuk'];
+        $email = $row['email'];
+        $handphone = $row['handphone'];
+        $status = $row['status'];
+
+         // Mengambil data nama provinsi berdasarkan kode provinsi
+         $queryProv = "SELECT nama_prov FROM prov WHERE kode_prov = '$kode_prov'";
+         $resultProv = $db->query($queryProv);
+         if ($resultProv && $resultProv->num_rows > 0) {
+             $rowProv = $resultProv->fetch_assoc();
+             $nama_prov = $rowProv['nama_prov'];
+         } else {
+             $nama_prov = "N/A";
+         }
+ 
+         // Mengambil data nama kabupaten berdasarkan kode kabupaten
+         $queryKab = "SELECT nama_kab FROM kab WHERE kode_kab = '$kode_kab'";
+         $resultKab = $db->query($queryKab);
+         if ($resultKab && $resultKab->num_rows > 0) {
+             $rowKab = $resultKab->fetch_assoc();
+             $nama_kab = $rowKab['nama_kab'];
+         } else {
+             $nama_kab = "N/A";
+         }
+
+    } else {
+        echo "No Data Found";
+    }
+}
+
 $db->close();
 ?>
 
@@ -25,20 +71,21 @@ $db->close();
 <head>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
     <title>Dashboard</title>
-    <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" />
-    <link rel="stylesheet" type="text/css" href="../css/dashboardMHS.css">
+    <link rel="shortcut icon" href="../assets/img/logo2.png" />
+    <!-- <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" /> -->
+    <link rel="stylesheet" type="text/css" href="../css/mhs/dashboardMHS.css">
     <!-- <script src="../js/scripts.js"></script> -->
 </head>
 <body>
 <style>
     .profile-box {
-        background-color: lightgray;
-        width: 980px;
-        height: 465px;
+        background-color: lightskyblue;
+        width: 1000px;
+        height: 600px;
         box-sizing: border-box;
         border-radius: 10px;
-        margin-top: 10px;
-        margin-right: auto;
+        margin:auto;
+        
     }
 </style>
 <div class="flex">
@@ -66,7 +113,7 @@ $db->close();
                 <img src="../assets/images/user.png" class="profil-side px-6 py-2 mx-auto d-block">
             </li>
             <li>
-                <p class="text-white text-center"><?php echo $nama; ?></p>
+                <p class="text-white text-center"><?php echo $username; ?></p>
                 <p class="text-white text-center">Mahasiswa Informatika</p>
             </li>
             <br>
@@ -82,9 +129,6 @@ $db->close();
                     <a href="skripsi.php" id="skripsi" class="text-white hover:bg-gray-600 px-4 py-2 block">Skripsi</a>
                 </div>
             </li>
-            <!-- <li class="mb-2">
-                <a href="../logout.php" id="logout" class="text-white hover:bg-gray-600 px-4 py-2 block">Logout</a>
-            </li> -->
         </ul>
     </aside>
 
@@ -96,38 +140,35 @@ $db->close();
                 <div>
                 <div class="profile-box shadow">
                     <h1 class="text-dark text-center font-bold py-3">Mahasiswa Informatika UNDIP</h1>
-                    <article>
-                        <p class="content text-dark font-bold" style="font-size: 15px;">NIM</p>
-                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;" disabled>
-                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px;">Nama Lengkap</p>
-                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;" disabled>
-                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px;">Angkatan</p>
-                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;" disabled>
-                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px;">Jalur Masuk</p>
-                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;" disabled>
-                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px;">Alamat</p>
-                        <input type="text" placeholder="XXXXX" style="margin-left: 300px;">
+                    <article class="content">
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-left: 300px;">NIM</p>
+                        <input type="text" name="nim" style="margin-left: 300px;" value="<?php echo $nim; ?>" disabled>
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px; margin-left: 300px;">Nama Lengkap</p>
+                        <input type="text" name="nama" style="margin-left: 300px;" value="<?php echo $nama; ?>" disabled>
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px; margin-left: 300px;">Angkatan</p>
+                        <input type="text" name="angkatan" style="margin-left: 300px;" value="<?php echo $angkatan; ?>" disabled>
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px; margin-left: 300px;">Jalur Masuk</p>
+                        <input type="text" name="jalur_masuk" style="margin-left: 300px;" value="<?php echo $jalur_masuk; ?>" disabled>
+                        <p class="content text-dark font-bold" style="font-size: 15px; margin-top: 15px; margin-left: 300px;">Alamat</p>
+                        <input type="text" name="alamat" style="margin-left: 300px;" value="<?php echo $alamat; ?>" disabled>
                         <p class="content text-dark font-bold" style="font-size: 15px; margin-left: 600px; margin-top: -291px;">Provinsi</p>
-                        <input type="text" placeholder="XXXXX" style="margin-left: 600px;">
+                        <input type="text" name="kode_prov" style="margin-left: 600px;" value="<?php echo $nama_prov; ?>" disabled>
                         <p class="content text-dark font-bold" style="font-size: 15px; margin-left: 600px; margin-top: 13px;">Kabupaten/Kota</p>
-                        <input type="text" placeholder="XXXXX" style="margin-left: 600px;">
+                        <input type="text" name="kode_kab" style="margin-left: 600px;" value="<?php echo $nama_kab; ?>" disabled>
                         <p class="content text-dark font-bold" style="font-size: 15px; margin-left: 600px; margin-top: 15px;">No.Telp</p>
-                        <input type="text" placeholder="XXXXX" style="margin-left: 600px;">
+                        <input type="text" name="handphone" style="margin-left: 600px;" value="<?php echo $handphone; ?>" disabled>
                         <p class="content text-dark font-bold" style="font-size: 15px; margin-left: 600px; margin-top: 16px;">Email</p>
-                        <input type="text" placeholder="XXXXX" style="margin-left: 600px;">
-                        <a href="dashboardMHS.php" class="btn-db text-white hover:bg-gray-600 px-4 py-2 block">Simpan</a>
+                        <input type="text" name="email" style="margin-left: 600px;" value="<?php echo $email; ?>" disabled>
+                        <a href="editProfil.php" class="btn-db text-white hover:bg-gray-600 px-4 py-2 block">Edit</a>
                     </article>
-                    <div class="profil-box">
+                    <div class="profil-box" style="display: flex">
                         <img src="../assets/images/user.png" class="profil-box px-10 py-2 d-block" style="margin-top: 50px;">
+                        <img src="../assets/images/pencil.png" style="margin-left: 70px; margin-top: 150px; width: 15px; height: 15px;">
+                        <a href="uploadfoto.php" style="margin-left: 10px; margin-top: 148px; font-size: 15px;">Upload Foto</a>
                     </div>
-                    <div style="display: flex;">
-                        <img src="../assets/images/pencil.png" style="margin-left: 100px; margin-top: -170px; width: 15px; height: 15px;">
-                        <a href="uploadfoto.php" class="text-dark" style="margin-left: 8px; margin-top: -170px; font-size: 13px;">Upload Foto</a>
-                    </div>
-                    <p style="margin-left: 95px; margin-top: -125px; font-size: 15px;">Status Akademik</p>
-                    <p class="status text-center py-1" style="background-color:springgreen; font-size: 15px;">Aktif 2023</p>
-                    <div>
-                        
+                    <p style="margin-left: 115px; margin-top: -125px; font-size: 15px;">Status Akademik</p>
+                    <input class="status text-center py-1" type="text" name="status" style="background-color:springgreen; font-size: 15px;" value="<?php echo $status; ?>" disabled>
+                    <div>   
                     </div>
                 </div>
             </div>

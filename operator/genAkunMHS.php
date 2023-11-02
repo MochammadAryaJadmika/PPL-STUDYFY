@@ -151,7 +151,7 @@ $db->close();
             <div class="p-10 bg-lightgrey rounded shadow-lg sharpened-shadow"  style="background-color: #F0F0F0;width:1000px">
                 <h1 class="text-xl font-bold mb-4">Generate Akun Mahasiswa</h1>
 
-                <!--Tab Dosen-->
+                <!--Tab Mahasiswa-->
                     <div class="mb-4 form-group">
                         <h2 class="font-bold">NIM</h2>
                         <input type=text placeholder="Masukkan NIM" class="w-full border rounded p-2 form-control custom">

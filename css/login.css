@@ -1,0 +1,9 @@
+@media (max-width: 480px) {
+    /* Aturan CSS untuk layar dengan lebar maksimal 768px */
+}
+
+.element {
+    width: 50%; /* Aturan responsif */
+    padding: 1em; /* Aturan responsif */
+}
+

@@ -98,18 +98,21 @@ $db->close();
                 <div class="profile-box shadow">
                     <h1 class="text-dark text-center font-bold py-3">Mahasiswa Informatika UNDIP</h1>
                     <form class="text-center" onsubmit="redirect()">
-                    <!-- SKS Input -->
-                    <div class="sks-input">
-                        <h2 class="center-labels font-bold mb-4">Jumlah SKS</h2>
-                        <form class="text-center">
-                        <input type="text" placeholder="Masukkan SKS">
-                    <!-- IRS Input -->
-                    <div class="irs-input">
-                        <h2 class="center-labels font-bold mb-4">Input IRS</h2>
-                        <input type="text" placeholder="Masukkan IRS">
-                        <a href="dashboardMHS.php" class="btn-irs text-white hover:bg-gray-600 px-4 py-2 block">Simpan</a>
-                </form>
-            </div>
+                        <!-- SKS Input -->
+                        <div class="sks-input">
+                            <h2 class="center-labels font-bold mb-4">Jumlah SKS</h2>
+                            <form class="text-center">
+                            <input type="text" placeholder="Masukkan SKS">
+                        </div>
+                        <!-- IRS Input -->
+                        <div class="form-group mb-3">
+                            <label for="file_ktp"> File KTP</label>
+                            <h2 class="center-labels font-bold mb-4">Input IRS</h2>
+                            <input type="file" class="form-control" placeholder="Masukkan IRS">
+                            <a href="dashboardMHS.php" class="btn-irs text-white hover:bg-gray-600 px-4 py-2 block">Simpan</a>
+                        </div>
+                    </form>
+                </div>
                 </div>
             </div>
             <!-- End konten -->

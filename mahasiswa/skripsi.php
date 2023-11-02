@@ -100,9 +100,9 @@ $db->close();
                     <div class="box">
                         <select id="status-skripsi" name="status-skripsi" class="form-control" style="width: 400px;">
                             <option value=""selected>---Status Skripsi---</option>
-                            <option value="kurang">Kurang</option>
-                            <option value="cukup">Cukup</option>
-                            <option value="bagus">Bagus</option>
+                            <option value="belum_ambil">Belum ambil</option>
+                            <option value="sedang_ambil">Sedang ambil</option>
+                            <option value="lulus">Lulus</option>
                         </select>
                     </div>
                     <!-- Progress Skripsi -->

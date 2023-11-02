@@ -27,7 +27,7 @@ $db->close();
     <title>Dashboard</title>
     <link rel="shortcut icon" href="../assets/img/logo2.png" />
     <!-- <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" /> -->
-    <link rel="stylesheet" type="text/css" href="../css/mhs/irs.css">
+    <link rel="stylesheet" type="text/css" href="../css/mhs/skripsi.css">
     <!-- <script src="../js/scripts.js"></script> -->
 </head>
 <body>
@@ -91,24 +91,35 @@ $db->close();
     <main class="main-content flex-1 p-4">
         <!-- CRUD -->
             <div class="profilebox" id="profilebox">
-                <h1 class="text-xl font-bold mb-4">Data IRS Mahasiswa</h1>
+                <h1 class="text-xl font-bold mb-4">Data Skripsi Mahasiswa</h1>
                 <div>
                 <div class="profile-box shadow">
                     <h1 class="text-dark text-center font-bold py-3">Mahasiswa Informatika UNDIP</h1>
-                    <form class="text-center" onsubmit="redirect()">
-                    <!-- SKS Input -->
-                    <div class="sks-input">
-                        <h2 class="center-labels font-bold mb-4" style="margin-right: 215px;">Jumlah SKS</h2>
-                        <form>
-                        <input type="text" placeholder="Masukkan SKS" style="margin-right: 120px;">
-                    <!-- IRS Input -->
-                    <div>
-                        <h2 class="center-labels font-bold mb-4" style="margin-right: 235px; margin-top: 15px;">Scan IRS</h2>
-                        <div class="box">
-                        <input type="file" id="irsFileInput" accept=".pdf, .jpg, .jpeg, .png" placeholder="No File Chosen" style="font-size: 15px; margin-right: 25px;"></div>
-                        <a href="dashboardMHS.php" class="btn-irs text-white hover:bg-gray-600 px-4 py-2 block">Simpan</a>
+                    <form onsubmit="redirect()">
+                    <h2 class="font-bold mb-2" style="margin-right: 215px; margin-left: 100px; margin-top: 30px">Status Skripsi</h2>
+                    <div class="box">
+                        <select id="status-skripsi" name="status-skripsi" class="form-control" style="width: 400px;">
+                            <option value=""selected>---Status Skripsi---</option>
+                            <option value="kurang">Kurang</option>
+                            <option value="cukup">Cukup</option>
+                            <option value="bagus">Bagus</option>
+                        </select>
                     </div>
-                        </form>
+                    <!-- Progress Skripsi -->
+                    <div class="py-3">
+                        <h2 class="font-bold mb-2" style="margin-right: 215px; margin-left: 100px;">Progress Skripsi</h2>
+                        <form>
+                        <textarea placeholder="Masukkan Progress Skripsi Anda" style="margin-right: 120px; margin-left: 100px; width: 400px; height: 100px;"></textarea>
+                    </div>
+                    <!-- Scan Berita Acara Sidang -->
+                    <div>
+                    <h2 class="font-bold mb-2" style="margin-left: 100px;">Scan Berita Acara Sidang</h2>
+                    <div class="box">
+                        <input type="file" accept=".pdf, .jpg, .jpeg, .png" placeholder="No File Chosen" style="font-size: 15px; margin-right: 25px;"></div>
+                        <div class="display: flex">
+                            <a href="dashboardMHS.php" class="btn-skripsi text-white hover:bg-gray-600 block" style="margin-left: 100px;">Simpan</a>
+                            <a href="cekNilai.php" class="btn-skripsi text-white hover:bg-gray-600 block">Cek Nilai</a>
+                        </div>
                     </div>
             </div>
             <!-- End konten -->
@@ -157,7 +168,7 @@ $db->close();
     }
 
     // Set item aktif pada "profil" saat halaman di load pertama kali
-    setActiveItem("irs");
+    setActiveItem("skripsi");
 </script>
 </body>
 </html>

@@ -14,10 +14,10 @@ function test_input($data) {
 if (isset($_POST['login'])) {
     $valid = TRUE;
 
-    // Memeriksa validasi nama
-    $nama = test_input($_POST['nama']);
-    if ($nama == '') {
-        $error_nama = 'Username harus diisi';
+    // Memeriksa validasi username
+    $username = test_input($_POST['username']);
+    if ($username == '') {
+        $error_username = 'Username harus diisi';
         $valid = FALSE;
     }
 
@@ -31,7 +31,7 @@ if (isset($_POST['login'])) {
     // Memeriksa validasi
     if ($valid) {
         // Assign query
-        $query = "SELECT * FROM users WHERE nama='" . $nama . "' AND Password='" . md5($password) . "' ";
+        $query = "SELECT * FROM users WHERE username='" . $username . "' AND Password='" . md5($password) . "' ";
         $result = $db->query($query);
         if (!$result) {
             die("Couldn't query the database: <br/>" . $db->error);
@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
             if ($result->num_rows > 0) {
                 $row = $result->fetch_object();
                 $_SESSION['status'] = "login";
-                $_SESSION['nama'] = $nama;
+                $_SESSION['username'] = $username;
                 if ($row->role == "mahasiswa") {
                     header('Location:./mahasiswa/dashboardMHS.php');
                 } else if ($row->role == "operator") {
@@ -106,8 +106,8 @@ if (isset($_POST['login'])) {
                             <!-- Username -->
                             <div class="mb-3">
                                 <label class="form-label" style="font-size: small"> Username <span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" placeholder="Masukkan username" id="users" name="nama" maxlength="50"  value="<?php if(isset($nama)) echo $nama;?>">
-                                <div class="error"><?php if(isset($error_nama)) echo $error_nama;?></div>
+                                <input type="text" class="form-control" placeholder="Masukkan username" id="users" name="username" maxlength="50"  value="<?php if(isset($username)) echo $username;?>">
+                                <div class="error"><?php if(isset($error_username)) echo $error_username;?></div>
                             </div>
                             <!-- Password -->
                             <div class="mb-3 position-relative">

@@ -11,6 +11,7 @@
         margin-top: 30px;
         margin-left: 300px;
     }
+    
 
     .status {
         margin-top: 5px;
@@ -87,11 +88,20 @@
     }
 
     .irs-input{
-        margin-top: 20px;
+        margin-left: 20px;
     }
+
+    .box {
+        margin: auto;
+        box-sizing: border-box;
+        background-color: white;
+        padding: auto;
+        width: 300px;
+    }
+
     .center-labels{
-        text-align: left;
-        margin-left: 398px;
+        text-align: center;
+        margin-right: 95px;
     }
     .btn-irs {
         margin: auto;

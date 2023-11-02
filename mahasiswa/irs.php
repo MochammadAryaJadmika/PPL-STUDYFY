@@ -113,17 +113,17 @@ $db->close();
             </div>
             <!-- End konten -->
 
-<script>
-    //JavaScript untuk menu collapse (progress akademik)
+            <script>
+    // JavaScript untuk menu collapse (progress akademik)
     const collapsibleButtons = document.querySelectorAll(".collapsible");
 
     // Add click event listeners to collapsible buttons
     collapsibleButtons.forEach((button) => {
         button.addEventListener("click", () => {
             const submenu = button.nextElementSibling; // Use nextElementSibling
-            if(submenu.style.display === "block" || submenu.style.display === "") {
+            if (submenu.style.display === "block" || submenu.style.display === "") {
                 submenu.style.display = "none";
-            }else{
+            } else {
                 submenu.style.display = "block";
             }
         });
@@ -158,6 +158,16 @@ $db->close();
 
     // Set item aktif pada "profil" saat halaman di load pertama kali
     setActiveItem("irs");
+
+    // Menangani pengiriman file
+    const fileInput = document.getElementById("irsFileInput");
+    fileInput.addEventListener("change", handleFileUpload);
+
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        // Lakukan pengiriman file ke server atau lakukan operasi lain sesuai kebutuhan Anda
+        console.log("File yang diunggah:", file);
+    }
 </script>
 </body>
 </html>

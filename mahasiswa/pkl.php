@@ -19,7 +19,16 @@ $query = "SELECT * FROM users WHERE username = '" . $username . "'";
     }
 $db->close();
 ?>
+<style>
+    .button-container {
+    display: flex;
+}
 
+.button-container a {
+    margin-right: 10px; /* Atur jarak antara tombol */
+}
+
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +50,13 @@ $db->close();
         margin-top: 10px;
         margin-right: auto;
     }
+    .sharpened-shadow {
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+}
+    .custom{
+        border-radius: 10px;
+    }
+
 </style>
 <div class="flex">
     <!-- Navbar -->
@@ -86,45 +102,40 @@ $db->close();
         </ul>
     </aside>
 
+     //konten
+    <main class="main-content p-4">
+    <div class="p-10 bg-lightgrey rounded shadow-lg sharpened-shadow"  style="background-color: #F0F0F0;width:800px">
+        <h1 class="text-xl font-bold mb-4">Data PKL Mahasiswa</h1>
 
-    <!-- Konten (belum) -->
-    <main class="main-content flex-1 p-4">
-        <!-- CRUD -->
-            <div class="profilebox" id="profilebox">
-                <h1 class="text-xl font-bold mb-4">Data PKL Mahasiswa</h1>
-                <div>
-                <div class="profile-box shadow">
-                    <h1 class="text-dark text-center font-bold py-3">Mahasiswa Informatika UNDIP</h1>
-                    <form onsubmit="redirect()">
-                    <h2 class="font-bold mb-2" style="margin-right: 215px; margin-left: 100px; margin-top: 30px">Status PKL</h2>
-                    <div class="box">
-                        <select id="status-skripsi" name="status-skripsi" class="form-control" style="width: 400px;">
-                            <option value=""selected>---Status PKL---</option>
-                            <option value="belum_ambil">Belum ambil</option>
-                            <option value="sedang_ambil">Sedang ambil</option>
-                            <option value="lulus">Lulus</option>
-                        </select>
-                    </div>
-                    <!-- Progress Skripsi -->
-                    <div class="py-3">
-                        <h2 class="font-bold mb-2" style="margin-right: 215px; margin-left: 100px;">Progress PKL</h2>
-                        <form>
-                        <textarea placeholder="Masukkan Progress PKL Anda" style="margin-right: 120px; margin-left: 100px; width: 400px; height: 100px;"></textarea>
-                    </div>
-                    <!-- Scan Berita Acara Sidang -->
-                    <div>
-                    <h2 class="font-bold mb-2" style="margin-left: 100px;">Scan Berita Acara Seminar</h2>
-                    <div class="box">
-                        <input type="file" accept=".pdf, .jpg, .jpeg, .png" placeholder="No File Chosen" style="font-size: 15px; margin-right: 25px;"></div>
-                        <div class="display: flex">
-                            <a href="dashboardMHS.php" class="btn-skripsi text-white hover:bg-gray-600 block" style="margin-left: 100px;">Simpan</a>
-                            <a href="cekNilai.php" class="btn-skripsi text-white hover:bg-gray-600 block">Cek Nilai</a>
-                        </div>
-                    </div>
+        <div class="mb-4 form-group">
+            <h2 class="font-bold">Status PKL</h2>
+            <select id="status-pkl" name="status-pkl" class="w-full py-2 border rounded form-control custom">
+                <option value="" selected>---Status PKL---</option>
+                <option value="belum">Belum ambil</option>
+                <option value="sedang">Sedang ambil</option>
+                <option value="lulus">Lulus</option>
+            </select>
+        </div>
+
+        <div class="mb-4 form-group">
+            <h2 class="font-bold">Progress PKL</h2>
+            <textarea placeholder="Masukkan Progress PKL Anda" class="w-full border rounded p-2 form-control custom" style="height: 100px;"></textarea>
+        </div>
+
+        <div class="mb-4">
+            <h2 class="font-bold form-group">Scan Berita Acara Seminar</h2>
+            <div class="flex items-center">
+                <input type="file" accept=".pdf, .jpg, .jpeg, .png" class="py-2 rounded border form-control custom">
             </div>
+            <div class="button-container" style="margin-left:-10px;">
+                <a href="dashboardMHS.php" class="ml-4 btn-skripsi text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Simpan</a>
+                <a href="cekNilai.php" class="ml-2 btn-skripsi text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Cek Nilai</a>
+            </div>
+        </div>
+        </div>
+    </main>
 
 
-            <!-- End konten -->
 
 <script>
     //JavaScript untuk menu collapse (progress akademik)

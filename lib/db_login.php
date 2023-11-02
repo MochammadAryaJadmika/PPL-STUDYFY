@@ -1,6 +1,6 @@
 <?php 
 $db_host = 'localhost';
-$db_database = 'ppl';
+$db_database = 'ppl_studyfyif';
 $db_username = 'root';
 $db_password = '';
 

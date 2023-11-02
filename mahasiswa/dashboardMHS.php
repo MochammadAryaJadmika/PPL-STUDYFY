@@ -81,7 +81,7 @@ $db->close();
     .profile-box {
         background-color: lightskyblue;
         width: 1000px;
-        height: 600px;
+        height: 530px;
         box-sizing: border-box;
         border-radius: 10px;
         margin:auto;

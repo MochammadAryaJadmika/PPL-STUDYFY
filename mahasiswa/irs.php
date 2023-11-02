@@ -19,7 +19,16 @@ $query = "SELECT * FROM users WHERE username = '" . $username . "'";
     }
 $db->close();
 ?>
+<style>
+    .button-container {
+    display: flex;
+}
 
+.button-container a {
+    margin-right: 10px; /* Atur jarak antara tombol */
+}
+
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +36,7 @@ $db->close();
     <title>Dashboard</title>
     <link rel="shortcut icon" href="../assets/img/logo2.png" />
     <!-- <link rel="shortcut icon" href="https://kulon2.undip.ac.id/pluginfile.php/1/theme_moove/favicon/1660361299/undip.ico" /> -->
-    <link rel="stylesheet" type="text/css" href="../css/mhs/irs.css">
+    <link rel="stylesheet" type="text/css" href="../css/mhs/skripsi.css">
     <!-- <script src="../js/scripts.js"></script> -->
 </head>
 <body>
@@ -41,6 +50,13 @@ $db->close();
         margin-top: 10px;
         margin-right: auto;
     }
+    .sharpened-shadow {
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+}
+    .custom{
+        border-radius: 10px;
+    }
+
 </style>
 <div class="flex">
     <!-- Navbar -->
@@ -86,32 +102,50 @@ $db->close();
         </ul>
     </aside>
 
+     //konten
+    <main class="main-content p-4">
+    <div class="p-10 bg-lightgrey rounded shadow-lg sharpened-shadow"  style="background-color: #F0F0F0;width:800px">
+        <h1 class="text-xl font-bold mb-4">Data IRS Mahasiswa</h1>
 
-    <!-- Konten (belum) -->
-    <main class="main-content flex-1 p-4">
-        <!-- CRUD -->
-            <div class="profilebox" id="profilebox">
-                <h1 class="text-xl font-bold mb-4">Data IRS Mahasiswa</h1>
-                <div>
-                <div class="profile-box shadow">
-                    <h1 class="text-dark text-center font-bold py-3">Mahasiswa Informatika UNDIP</h1>
-                    <form class="text-center" onsubmit="redirect()">
-                    <!-- SKS Input -->
-                    <div class="sks-input">
-                        <h2 class="center-labels font-bold mb-4" style="margin-right: 215px;">Jumlah SKS</h2>
-                        <form>
-                        <input type="text" placeholder="Masukkan SKS" style="margin-right: 120px;">
-                    <!-- IRS Input -->
-                    <div>
-                        <h2 class="center-labels font-bold mb-4" style="margin-right: 235px; margin-top: 15px;">Scan IRS</h2>
-                        <div class="box">
-                        <input type="file" id="irsFileInput" accept=".pdf, .jpg, .jpeg, .png" placeholder="No File Chosen" style="font-size: 15px; margin-right: 25px;"></div>
-                        <a href="dashboardMHS.php" class="btn-irs text-white hover:bg-gray-600 px-4 py-2 block">Simpan</a>
-                    </div>
-                        </form>
-                    </div>
+        <div class="mb-4 form-group">
+            <h2 class="font-bold">Semester</h2>
+            <select id="pilih_semester" name="pilih_semester" class="w-full py-2 border rounded form-control custom">
+                <option value="" selected>---Pilih Semester---</option>
+                <option value="sem1">Semester 1</option>
+                <option value="sem2">Semester 2</option>
+                <option value="sem3">Semester 3</option>
+                <option value="sem4">Semester 4</option>
+                <option value="sem5">Semester 5</option>
+                <option value="sem6">Semester 6</option>
+                <option value="sem7">Semester 7</option>
+                <option value="sem8">Semester 8</option>
+                <option value="sem9">Semester 9</option>
+                <option value="sem10">Semester 10</option>
+                <option value="sem11">Semester 11</option>
+                <option value="sem12">Semester 12</option>
+                <option value="sem13">Semester 13</option>
+                <option value="sem14">Semester 14</option>
+            </select>
+        </div>
+
+        <div class="mb-4 form-group">
+            <h2 class="font-bold">Jumlah SKS</h2>
+            <input type=text placeholder="Masukkan Jumlah SKS Anda" class="w-full border rounded p-2 form-control custom">
+        </div>
+
+        <div class="mb-4">
+            <h2 class="font-bold form-group">Scan IRS</h2>
+            <div class="flex items-center">
+                <input type="file" accept=".pdf, .jpg, .jpeg, .png" class="py-2 rounded border form-control custom">
             </div>
-            <!-- End konten -->
+            <div class="button-container" style="margin-left:-10px;">
+                <a href="dashboardMHS.php" class="ml-4 btn-skripsi text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Simpan</a>
+            </div>
+        </div>
+        </div>
+    </main>
+
+
 
             <script>
     // JavaScript untuk menu collapse (progress akademik)

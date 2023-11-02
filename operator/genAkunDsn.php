@@ -51,6 +51,17 @@ if (!$resultDoswal) {
 $db->close();
 ?>
 
+<style>
+    .button-container {
+    display: flex;
+}
+
+.button-container a {
+    margin-right: 10px; /* Atur jarak antara tombol */
+}
+
+</style>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,6 +73,24 @@ $db->close();
     <!-- <script src="../js/scripts.js"></script> -->
 </head>
 <body>
+<style>
+    .profile-box {
+        background-color: lightskyblue;
+        width: 980px;
+        height: 465px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-right: auto;
+    }
+    .sharpened-shadow {
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+    }
+    .custom{
+        border-radius: 10px;
+    }
+
+</style>
 
 <div class="flex">
     <!-- Navbar -->
@@ -118,27 +147,46 @@ $db->close();
 
 
     <!-- Konten (belum) -->
-    <main class="main-content flex-1 p-4">
-        <!-- CRUD -->
-            <div class="profilebox" id="profilebox">
-                <h1 class="text-xl font-bold mb-4">Dashboard</h1>
-                <div class="profile-box-12-container">
-                <div class="profile-box-1 shadow">
-                    <h1 class="text-dark text-8xl text-center font-bold py-5"><?php echo $totalOperator; ?></h1>
-                    <p class="text-dark text-center">Total Operator Departemen</p>
-                </div>
-                <div class="profile-box-2 shadow px-10">
-                    <h1 class="text-dark text-8xl text-center font-bold py-5"><?php echo $totalMahasiswa; ?></h1>
-                    <p class="text-dark text-center">Total Mahasiswa</p>
-                </div>
-                </div>
-                <div class="profile-box-3-container">
-                <div class="profile-box-3 shadow">
-                    <h1 class="text-dark text-8xl text-center font-bold py-5"><?php echo $totalDoswal; ?></h1>
-                    <p class="text-dark text-center">Total Dosen Wali</p>
-                </div>
-                </div>
+        <main class="main-content p-4">
+            <div class="p-10 bg-lightgrey rounded shadow-lg sharpened-shadow"  style="background-color: #F0F0F0;width:1000px">
+                <h1 class="text-xl font-bold mb-4">Generate Akun Dosen</h1>
+
+                <!--Tab Dosen-->
+                    <div class="mb-4 form-group">
+                        <h2 class="font-bold">NIP</h2>
+                        <input type=text placeholder="Masukkan NIP" class="w-full border rounded p-2 form-control custom">
+                    </div>
+
+                    <div class="mb-4 form-group">
+                        <h2 class="font-bold">Nama Dosen</h2>
+                        <input type=text placeholder="Masukkan Nama" class="w-full border rounded p-2 form-control custom">
+                    </div>
+
+                    <div class="mb-4 form-group">
+                        <h2 class="font-bold">Email</h2>
+                        <input type=email placeholder="Masukkan Email" class="w-full border rounded p-2 form-control custom">
+                    </div>
+
+                    <div class="mb-4 form-group">
+                        <h2 class="font-bold">Status</h2>
+                        <select id="status" name="status" class="w-full py-2 border rounded form-control custom">
+                            <option value="">Pilih Status</option>
+                            <option value="Aktif">Aktif</option>
+                            <option value="Cuti">Cuti</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <h2 class="font-bold form-group">Upload File</h2>
+                        <div class="flex items-center">
+                            <input type="file" accept=".pdf, .jpg, .jpeg, .png" class="py-2 rounded border form-control custom">
+                        </div>
+                        <div class="button-container" style="margin-left:-10px;">
+                            <a href="dashboardMHS.php" class="ml-4 btn-skripsi text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Generate</a>
+                        </div>
+                    </div>
             </div>
+        </main> 
             <!-- End konten -->
 
 <script>
@@ -180,7 +228,7 @@ $db->close();
     }
 
     // Set item aktif pada "dashboard" saat halaman di load pertama kali
-    setActiveItem("dashboard");
+    setActiveItem("gen_dsn");
 </script>
 </body>
 </html>
